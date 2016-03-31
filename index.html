@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>S I D E</title>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
+  </head>
+
+
+  <body ng-app="app">
+    <h1>Hello</h1>
+    <div ui-view></div>    
+    <div ng-controller="hoge">
+      <button ng-click="goPage('a')">side-A</button>
+      <button ng-click="goPage('b')">side-B</button>
+      <button ng-click="goPage('c')">side-C</button>
+    </div>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/nvd3/build/nv.d3.js"></script>
+    <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/zip.js/WebContent/zip.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/jssha/src/sha.js"></script>
+    <script src="bower_components/numeral/numeral.js"></script>
+
+
+    <script src="app.js"></script>
+
+  </body>
+</html>
+
+
