@@ -3,8 +3,8 @@ angular
   .config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/a');
     $stateProvider.state('a', {
-      url:'/a',
-      templateUrl: '/src/main/hmtl/side-A.html',
+       url:'/a',
+       templateUrl: '/src/main/html/side-A.html',
     }).state('b', {
       url:'/b',
       templateUrl: '/src/main/html/side-B.html',
@@ -17,6 +17,7 @@ angular
   .controller('hoge', function($scope, $state){
     $scope.goPage = function(page){
       $state.go(page);
+      //alert(page);
     };
   });
 ;
