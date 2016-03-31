@@ -4,13 +4,13 @@ angular
     $urlRouterProvider.otherwise('/a');
     $stateProvider.state('a', {
       url:'/a',
-      templateUrl: 'side-A.html',
+      templateUrl: '/src/main/hmtl/side-A.html',
     }).state('b', {
       url:'/b',
-      templateUrl: 'side-B.html',
+      templateUrl: '/src/main/html/side-B.html',
     }).state('c', {
       url:'/c',
-      templateUrl: 'side-C.html',
+      templateUrl: '/src/main/html/side-C.html',
     })
     ;
   })
