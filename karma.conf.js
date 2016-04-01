@@ -33,7 +33,13 @@ module.exports = function(config) {
       'bower_components/zip.js/WebContent/zip.js',
 
 
-      'src/test/**/*Spec.js'
+      './src/main/js/app.js',
+      './src/main/js/dataService.js',
+      './src/main/**/*.js',
+      './src/main/js/*.js',
+
+
+      './src/test/**/*Spec.js'
     ],
 
 
