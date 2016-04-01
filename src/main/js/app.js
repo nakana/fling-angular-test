@@ -5,9 +5,9 @@ angular
     $stateProvider.state('a', {
       url:'/a',
       resolve: {
-	data: function($resource){
-	  return $resource('/test/a').get();
-	}
+ 	data: function($resource, dataService){
+ 	  return dataService.getData('a');
+ 	},
       },
       controller: function($scope, data){
 	$scope.data = data;
