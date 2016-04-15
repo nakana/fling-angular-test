@@ -1,7 +1,23 @@
 angular
   .module('app', ['ui.router', 'ngResource'])
-  .config(function($stateProvider, $urlRouterProvider){
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider){
     $urlRouterProvider.otherwise('/a');
+
+    $httpProvider.interceptors.push(function($q){
+      return {
+	'requestError': function(rejection){
+	  console.log('REQUEST!!!!!!');
+	  return $q.reject(rejection);
+	},
+	'responseError': function(rejection){
+	  console.log('RESPONSE!!!!!!');
+	  return $q.reject(rejection);
+	},
+      }
+    });
+
+
+
     $stateProvider.state('a', {
       url:'/a',
       resolve: {

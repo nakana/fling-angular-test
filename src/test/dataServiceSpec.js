@@ -21,16 +21,33 @@ describe("サービステスト", function(){
     expect(result).toEqual('mock-data-a');
   }));
 
-  it("想定データを受けとれないテスト", inject(function(dataService){
+  it("想定データを受けとれず400番を返すテスト", inject(function(dataService){
+    $httpBackend.expect('GET', '/test/a').respond(400, '', {Coneections: 'keep-alive'});
+    var result;
+    dataService.getData('a').get(function(data){
+      result = data.value;
+    }, function(data){
+      // console.log(data);
+      // console.log(data.status);
+      // console.log(data.headers());
+      // console.log(data.headers('expires'));
+      result = 'error';
+    });
+    $httpBackend.flush();
+
+    expect(result).toEqual('error');
+  }));
+
+  it("想定データを受けとれず500番を返すテスト", inject(function(dataService){
     $httpBackend.expect('GET', '/test/a').respond(500, '', {Expires: 0});
     var result;
     dataService.getData('a').get(function(data){
       result = data.value;
     }, function(data){
-      console.log(data);
-      console.log(data.status);
-      console.log(data.headers());
-      console.log(data.headers('expires'));
+      // console.log(data);
+      // console.log(data.status);
+      // console.log(data.headers());
+      // console.log(data.headers('expires'));
       result = 'error';
     });
     $httpBackend.flush();
