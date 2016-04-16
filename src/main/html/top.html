@@ -4,5 +4,19 @@
   <button ng-click="goPage('top.a')">side-A</button>
   <button ng-click="goPage('top.b')">side-B</button>
   <button ng-click="goPage('top.c')">side-C</button>
+  <button ng-click="goPage('success')">success</button>
+  <button ng-click="goPage('error')">error</button>
+
+  <br>  <br>  <br>  <br>  <br>  <br>  <br>  <br>
+
+  <h2>ErrorResponseのテスト</h2>
+  <button ng-click="goError(101)">101</button>
+  <button ng-click="goError(200)">200</button>
+  <button ng-click="goError(303)">303</button>
+  <button ng-click="goError(401)">401</button>
+  <button ng-click="goError(403)">403</button>
+  <button ng-click="goError(404)">404</button>
+  <button ng-click="goError(505)">505</button>
+
 </div>
 <a ui-sref="login">Loginへ</a>

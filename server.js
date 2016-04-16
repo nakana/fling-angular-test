@@ -16,6 +16,11 @@ app.get('/api/login/ng', function (req, res) {
   res.status(401).send({result: 'ng'});
 });
 
+app.get('/api/error/:status', function (req, res) {
+  var status = req.params.status;
+  res.status(status).send({result: 'ng', status: status});
+});
+
 _.forEach(['a', 'b', 'c'], function(s){
   app.get('/test/' + s, function(req, res){
     res.send({val: 'mock-data-' + s});

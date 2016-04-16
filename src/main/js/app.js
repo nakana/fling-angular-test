@@ -53,12 +53,25 @@ angular
     }).state('top.c', {
       url:'/c',
       templateUrl: '/src/main/html/side-C.html',
+    }).state('success', {
+      url:'/success',
+      templateUrl: '/src/main/html/success.html',
+    }).state('error', {
+      url:'/error',
+      templateUrl: '/src/main/html/error.html',
     })
     ;
   })
-  .controller('hoge', function($scope, $state){
+  .controller('hoge', function($scope, $state, $resource){
     $scope.goPage = function(page){
       $state.go(page);
+    };
+    $scope.goError = function(status){
+      $resource('/api/error/:status').get({status: status}, function(data){
+	$state.go('success');
+      }, function(rejection){
+	$state.go('error');
+      });
     };
   });
 ;
