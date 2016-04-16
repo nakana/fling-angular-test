@@ -9,6 +9,12 @@ app.use(express.static('.'));
 app.get('/', function (req, res) {
   res.send('Hello World');
 });
+app.get('/api/login/ok', function (req, res) {
+  res.send({result: 'ok'});
+});
+app.get('/api/login/ng', function (req, res) {
+  res.status(401).send({result: 'ng'});
+});
 
 _.forEach(['a', 'b', 'c'], function(s){
   app.get('/test/' + s, function(req, res){

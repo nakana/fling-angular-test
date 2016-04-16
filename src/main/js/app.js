@@ -19,9 +19,17 @@ angular
     $stateProvider
     .state('login', {
       url:'/login',
-      controller: function($scope, $state){
-	$scope.login = function(){
-	  $state.go('top');
+      controller: function($scope, $resource, $state){
+	$scope.login = function(user){
+	  $resource('/api/login/:user').get({user: user}, function(data){
+	    console.log('*** OK ***');
+	    console.log(data);
+	    $state.go('top');	    
+	  }, function(rejection){
+	    console.log('*** NG ***');
+	    console.log(rejection);
+	    $state.go('login');
+	  });
 	}
       },
       templateUrl: '/src/main/html/login.html',
