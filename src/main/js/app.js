@@ -1,7 +1,7 @@
 angular
   .module('app', ['ui.router', 'ngResource'])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider){
-    $urlRouterProvider.otherwise('/a');
+    $urlRouterProvider.otherwise('/login');
 
     $httpProvider.interceptors.push(function($q){
       return {
@@ -16,9 +16,19 @@ angular
       }
     });
 
-
-
-    $stateProvider.state('a', {
+    $stateProvider
+    .state('login', {
+      url:'/login',
+      controller: function($scope, $state){
+	$scope.login = function(){
+	  $state.go('top');
+	}
+      },
+      templateUrl: '/src/main/html/login.html',
+    }).state('top', {
+      url:'/top',
+      templateUrl: '/src/main/html/top.html',
+    }).state('top.a', {
       url:'/a',
       resolve: {
  	data: function($resource, dataService){
@@ -28,11 +38,11 @@ angular
       controller: function($scope, data){
 	$scope.data = data;
       },
-      template: '<div>{{data.val}}</div>',
-    }).state('b', {
+      template: '<div>AAA{{data.val}}AAA</div>',
+    }).state('top.b', {
       url:'/b',
       templateUrl: '/src/main/html/side-B.html',
-    }).state('c', {
+    }).state('top.c', {
       url:'/c',
       templateUrl: '/src/main/html/side-C.html',
     })
