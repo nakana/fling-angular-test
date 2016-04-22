@@ -1,16 +1,30 @@
+var error_message;
+
 angular
   .module('app', ['ui.router', 'ngResource'])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider){
     $urlRouterProvider.otherwise('/login');
 
-    $httpProvider.interceptors.push(function($q){
+    $httpProvider.interceptors.push(function($q, $location){
       return {
-	'requestError': function(rejection){
+	'request': function(config){
 	  console.log('REQUEST!!!!!!');
+	  return config;
+	},
+	'response': function(response){
+	  console.log('RESPONSE!!!!!!');
+	  return response;
+	},
+	'requestError': function(rejection){
+	  console.log('REQUEST ERROR!!!!!!');
 	  return $q.reject(rejection);
 	},
 	'responseError': function(rejection){
-	  console.log('RESPONSE!!!!!!');
+	  console.log('RESPONSE ERROR!!!!!!');
+	  error_message = rejection.status + ': ' + rejection.statusText;
+	  if(rejection.status !== 401) {
+	    location.href ='index.html#/error';
+	  }
 	  return $q.reject(rejection);
 	},
       }
@@ -58,6 +72,9 @@ angular
       templateUrl: '/src/main/html/success.html',
     }).state('error', {
       url:'/error',
+      controller: function($scope){
+	$scope.errMsg = error_message;
+      },
       templateUrl: '/src/main/html/error.html',
     })
     ;
@@ -67,10 +84,13 @@ angular
       $state.go(page);
     };
     $scope.goError = function(status){
+      // $resource('/api/error/:status').get({status: status}, function(data){
+      // 	$state.go('success');
+      // }, function(rejection){
+      // 	$state.go('error');
+      // });
       $resource('/api/error/:status').get({status: status}, function(data){
 	$state.go('success');
-      }, function(rejection){
-	$state.go('error');
       });
     };
   });
