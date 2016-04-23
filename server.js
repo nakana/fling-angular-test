@@ -7,6 +7,7 @@ var app = express();
 
 app.use(express.static('.'));
 app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.json());
 
 
 app.get('/', function (req, res) {
@@ -31,8 +32,7 @@ _.forEach(['a', 'b', 'c'], function(s){
 });
 
 
-app.post('/mypost', function(req, res){
-//  console.log(JSON.parse(JSON.stringify(req)));
+app.post('/mybook', function(req, res){
   console.log(req.body);
   res.send('hello');
 });

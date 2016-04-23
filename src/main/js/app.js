@@ -80,6 +80,9 @@ angular
 	$scope.errMsg = error_message;
       },
       templateUrl: '/src/main/html/error.html',
+    }).state('resource', {
+      url:'/resource',
+      templateUrl: '/src/main/html/resource.html',
     })
     ;
   })
