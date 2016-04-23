@@ -7,7 +7,7 @@
   <button ng-click="goPage('success')">success</button>
   <button ng-click="goPage('error')">error</button>
 
-  <br>  <br>  <br>  <br>  <br>  <br>  <br>  <br>
+  <br>  <br>  <br>  
 
   <h2>ErrorResponseのテスト</h2>
   <button ng-click="goError(101)">101</button>
@@ -18,5 +18,15 @@
   <button ng-click="goError(404)">404</button>
   <button ng-click="goError(505)">505</button>
 
+  <br>  <br>  <br>
+
+  <h2>HttpPoviderの挙動を上書けるかのテスト</h2>
+  <button ng-click="goTransNothing()">Nothing</button>
+  <button ng-click="goTransBasic()">Basic</button>
+  <button ng-click="goTransEmptyList()">EmptyList</button>
+  <button ng-click="goTransList()">TransList</button>
+  <button ng-click="goPost()">Post</button>  
+  
+  
 </div>
 <a ui-sref="login">Loginへ</a>

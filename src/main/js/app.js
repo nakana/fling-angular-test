@@ -8,19 +8,23 @@ angular
     $httpProvider.interceptors.push(function($q, $location){
       return {
 	'request': function(config){
-	  console.log('REQUEST!!!!!!');
+	  console.log('interceptor REQUEST!!!!!!');
+	  console.log(config);
 	  return config;
 	},
 	'response': function(response){
-	  console.log('RESPONSE!!!!!!');
+	  console.log('interceptor RESPONSE!!!!!!');
+	  console.log(response);
 	  return response;
 	},
 	'requestError': function(rejection){
-	  console.log('REQUEST ERROR!!!!!!');
+	  console.log('interceptor REQUEST ERROR!!!!!!');
+	  console.log(rejection);
 	  return $q.reject(rejection);
 	},
 	'responseError': function(rejection){
-	  console.log('RESPONSE ERROR!!!!!!');
+	  console.log('interceptor RESPONSE ERROR!!!!!!');
+	  console.log(rejection);
 	  error_message = rejection.status + ': ' + rejection.statusText;
 	  if(rejection.status !== 401) {
 	    location.href ='index.html#/error';
@@ -93,5 +97,84 @@ angular
 	$state.go('success');
       });
     };
+    $scope.goTransNothing = function(){
+      $resource('/').get(function(data){
+	$state.go('success');
+      });
+    };
+    $scope.goTransBasic = function(){
+      $resource('/:hoge', {hoge: 178, geho: 234}, {
+	get: {
+	  transformRequest: function(config){
+	    console.log('trsfmReq!!!!');
+	    console.log(config);
+	    return 'hoge=reqreqreq';
+	  },
+	  transformResponse: function(response){
+	    console.log('trsfmRes!!!!');
+	    console.log(response);
+	    return 'resresres';
+	  }
+	}
+      }).get(function(data){
+	$state.go('success');
+      });
+    };
+    
+    // 別に関数をクリアしている訳ではなかった
+    $scope.goTransEmptyList = function(){
+      $resource('/', {}, {get : { transformRequest: [], transformResponse: [] }}).get(function(data){
+	$state.go('success');
+      });
+    };
+
+
+    $scope.goTransList = function(){
+      $resource('/', {}, {
+	get: {
+	  transformRequest: [function(config){
+	    console.log('trsfmReq0!!!!');
+	    console.log(config);
+	    return 'reqreqreq';
+	  },function(config){
+	    console.log('trsfmReq1!!!!');
+	    console.log(config);
+	    return config + '1';
+	  },function(config){
+	    console.log('trsfmReq2!!!!');
+	    console.log(config);
+	    return config + '2';
+	  }],
+	  transformResponse: function(response){
+	    console.log('trsfmRes!!!!');
+	    console.log(response);
+	    return 'resresres';
+	  }}}).get(function(data){
+	    $state.go('success');
+	  });
+    };
+      
+    $scope.goPost = function(){
+      var MyPost = $resource('/mypost', {}, {
+	save: {
+	  transformRequest: function(config){
+	    console.log('trsfmReq!!!!');
+	    console.log(config);
+	    return 'hoge=reqreqreq';
+	  },
+	  transformResponse: function(response){
+	    console.log('trsfmRes!!!!');
+	    console.log(response);
+	    return 'resresres';
+	  }
+	}
+      });
+
+      var mp = new MyPost();
+      mp.addr = 'abc';
+      mp.$save(function(data){
+	console.log(data);
+      });
+    };
   });
-;
+
